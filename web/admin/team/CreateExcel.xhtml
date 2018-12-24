@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="TeamExcelCreateDlg" widgetVar="TeamExcelCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg['CreateTeamTitle']}">
+        <h:form id="TeamExcelCreateForm" enctype="multipart/form-data">
+            <h:panelGroup id="display">
+                <p:panelGrid columns="2" rendered="#{teamController.selected != null}">
+                    <p:outputLabel value="Upload"/>
+                    <p:fileUpload fileUploadListener="#{teamController.handleFileUpload}" mode="advanced" skinSimple="true"
+                                  allowTypes="/(\.|\/)(xls|xlsx)$/"/>
+                    <p:outputLabel value="Sheet" for="sheet" />
+                    <p:inputText id="sheet" value="#{teamController.sheet}" title="Sheet" required="true" requiredMessage="Sheet name required"/>
+                    <p:outputLabel value="Start Row" for="startRow"/>
+                    <p:inputNumber id="startRow" value="#{teamController.firstRow}"/>
+                    <p:outputLabel value="Last Row" for="lastRow"/>
+                    <p:inputNumber id="lastRow" value="#{teamController.lastRow}"/>
+                    <p:outputLabel value="Start Column" for="startColumn"/>
+                    <p:inputNumber id="startColumn" value="#{teamController.firstColumn}"/>
+                    <p:outputLabel value="Last Column" for="lastColumn"/>
+                    <p:inputNumber id="lastColumn" value="#{teamController.lastColumn}"/>
+                    <p:outputLabel value="League" for="league"/>
+                        <p:selectOneMenu id="league" value="#{teamController.league}" required="true" requiredMessage="League is required">
+                            <f:selectItems value="#{leagueController.leaguesAvailableSelectOne}"
+                                           var="leagues"
+                                           itemLabel="#{leagues.name}"
+                                           itemValue="#{leagues}"/>
+                        </p:selectOneMenu>
+                </p:panelGrid>
+                <p:commandButton actionListener="#{teamController.createTeams}" value="#{msg['Save']}" update="display,:TeamListForm:datalist,:growl" onclick="PF('statusDialog').show()" oncomplete="handleSubmit(args,'TeamExcelCreateDialog');"/>
+                <p:commandButton value="#{msg['Cancel']}" type="button" onclick="PF('TeamExcelCreateDialog').hide()"/>
+            </h:panelGroup>
+        </h:form>
+    </p:dialog>
+
+</ui:composition>

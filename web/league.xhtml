@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="#{layoutMB.template}">
+
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewParam name="League" value="#{matchController.leagueId}"/>
+        </f:metadata>
+        <ui:param name="title" value="#{matchController.league.country.name}"/> <!-- Automatic create breadCrumb and page title when param 'title' is provided. --> 
+        <style type="text/css">
+            .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+        </style>
+    </ui:define>
+    <ui:define name="description">
+        <h:outputText value="#{matchController.league.name} Predictions"/>
+    </ui:define>
+
+    <ui:define name="content-header">
+        <div class="ui-g hidden">
+            <div class="ui-g-12 ui-g-nopad">
+                <div class="ui-g-6 ui-md-3 hidden-xs"><p:graphicImage library="images" name="1466448054450_154937.jpeg" style="width:100%"/></div>
+                <div class="ui-g-6 ui-md-3 hidden-xs"><p:graphicImage library="images" name="1466448054450_154937.jpeg" style="width:100%"/></div>
+                <div class="ui-g-6 ui-md-3"><p:graphicImage library="images" name="1466448054450_154937.jpeg" style="width:100%"/></div>
+                <div class="ui-g-6 ui-md-3"><p:graphicImage library="images" name="1466448054450_154937.jpeg" style="width:100%"/></div>
+            </div>
+        </div>
+    </ui:define>
+
+    <ui:define name="body">
+        <div class="box">
+            <div class="box-header with-border">
+                <h:form>
+                    <div class="align-center">
+                        <p:commandLink value="Over/Under" update=":upComingMatchlist,:finishedMatchList,@form" rendered="#{not matchController.renderGoals}">
+                            <f:setPropertyActionListener value="true" target="#{matchController.renderGoals}"/>
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderDoubleChance}"/>
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderBtts}"/>
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderThreeWaysFirstHalf}"/>
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderThreeWaysSecondHalf}"/>
+                        </p:commandLink>
+                        <p:spacer width="5"/>
+                        <p:commandLink value="BTTS" update=":upComingMatchlist,:finishedMatchList,@form" rendered="#{not matchController.renderBtts}">
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderGoals}"/>
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderDoubleChance}"/>
+                            <f:setPropertyActionListener value="true" target="#{matchController.renderBtts}"/>
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderThreeWaysFirstHalf}"/>
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderThreeWaysSecondHalf}"/>
+                        </p:commandLink>
+                        <p:spacer width="5"/>
+                        <p:commandLink value="Double" update=":upComingMatchlist,:finishedMatchList,@form" rendered="#{not matchController.renderDoubleChance}">
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderGoals}"/>
+                            <f:setPropertyActionListener value="true" target="#{matchController.renderDoubleChance}"/>
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderBtts}"/>
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderThreeWaysFirstHalf}"/>
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderThreeWaysSecondHalf}"/>
+                        </p:commandLink>
+                        <p:spacer width="5"/>
+                        <p:commandLink value="FirstHalf 1X2" update=":upComingMatchlist,:finishedMatchList,@form" rendered="#{not matchController.renderThreeWaysFirstHalf}">
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderGoals}"/>
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderDoubleChance}"/>
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderBtts}"/>
+                            <f:setPropertyActionListener value="true" target="#{matchController.renderThreeWaysFirstHalf}"/>
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderThreeWaysSecondHalf}"/>
+                        </p:commandLink>
+                        <p:spacer width="5"/>
+                        <p:commandLink value="SecondHalf 1X2" update=":upComingMatchlist,:finishedMatchList,@form" rendered="#{not matchController.renderThreeWaysSecondHalf}">
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderGoals}"/>
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderDoubleChance}"/>
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderBtts}"/>
+                            <f:setPropertyActionListener value="false" target="#{matchController.renderThreeWaysFirstHalf}"/>
+                            <f:setPropertyActionListener value="true" target="#{matchController.renderThreeWaysSecondHalf}"/>
+                        </p:commandLink>
+                    </div>
+                </h:form>
+            </div>
+            
+            <div class="box-body">
+                <p:dataTable id="upComingMatchlist" value="#{matchController.leagueNotStarted}"
+                             var="notStarted" selectionMode="single" style="background-color: #00a65a"
+                             rowKey="#{notStarted.id}">
+                    <f:facet name="header">
+                        Upcoming Matches
+                    </f:facet>
+                    <p:columnGroup type="header">
+                        <p:row>
+                            <p:column colspan="2" rowspan="2" headerText="Home - Away" styleClass="ui-md-3" style="font-size: 80%; font-weight: bolder"/>
+                            <p:column colspan="4" headerText="1st Half" styleClass="ui-md-3" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysFirstHalf}"/>
+                            <p:column colspan="3" headerText="1st Half Over/Under 1.5" styleClass="ui-md-2" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column colspan="4" headerText="2nd Half" styleClass="ui-md-3" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysSecondHalf}"/>
+                            <p:column colspan="3" headerText="2nd Half Over/Under 1.5" styleClass="ui-md-2" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column colspan="4" headerText="Double Chance" styleClass="ui-md-3" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderDoubleChance}"/>
+                            <p:column colspan="3" headerText="BTTS" styleClass="ui-md-2" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderBtts}"/>
+                            <p:column colspan="3" headerText="Over/Under 2.5" styleClass="ui-md-2" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                        </p:row>
+                        <p:row>
+                            <p:column headerText="1" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysFirstHalf}"/>
+                            <p:column headerText="X" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysFirstHalf}"/>
+                            <p:column headerText="2" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysFirstHalf}"/>
+                            <p:column headerText="Tip" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysFirstHalf}"/>
+                            <p:column headerText="Over" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column headerText="Under" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column headerText="Tip" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column headerText="1" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysSecondHalf}"/>
+                            <p:column headerText="X" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysSecondHalf}"/>
+                            <p:column headerText="2" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysSecondHalf}"/>
+                            <p:column headerText="Tip" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysSecondHalf}"/>
+                            <p:column headerText="Over" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column headerText="Under" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column headerText="Tip" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column headerText="1X" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderDoubleChance}"/>
+                            <p:column headerText="12" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderDoubleChance}"/>
+                            <p:column headerText="X2" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderDoubleChance}"/>
+                            <p:column headerText="Tip" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderDoubleChance}"/>
+                            <p:column headerText="GG" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderBtts}"/>
+                            <p:column headerText="NG" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderBtts}"/>
+                            <p:column headerText="Tip" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderBtts}"/>
+                            <p:column headerText="Over" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column headerText="Under" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column headerText="Tip" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                        </p:row>
+                    </p:columnGroup>
+                    <p:column colspan="2" style="text-align: left; font-size: x-small; font-weight: bolder">
+                        <h:outputText value="#{notStarted.homeTeam.name} #{notStarted.awayTeam.name}"/>
+                        <p>
+                            <h:outputText value="#{notStarted.matchDate}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Africa/Lagos"/>
+                            </h:outputText>
+                            <h:outputText value=" "/>
+                            <h:outputText value="#{notStarted.matchTime}">
+                                <f:convertDateTime pattern="HH:mm:ss" timeZone="Africa/Lagos"/>
+                            </h:outputText>
+                        </p>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderThreeWaysFirstHalf}">
+                        <h:outputText value="#{notStarted.firstHalf.home}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderThreeWaysFirstHalf}">
+                        <h:outputText value="#{notStarted.firstHalf.draw}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderThreeWaysFirstHalf}">
+                        <h:outputText value="#{notStarted.firstHalf.away}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderThreeWaysFirstHalf}">
+                        <h:outputText value="#{notStarted.firstHalf.tip}"/>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderGoals}">
+                        <h:outputText value="#{notStarted.firstHalfGoals.over}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderGoals}">
+                        <h:outputText value="#{notStarted.firstHalfGoals.under}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderGoals}">
+                        <h:outputText value="#{notStarted.firstHalfGoals.tip}"/>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderThreeWaysSecondHalf}">
+                        <h:outputText value="#{notStarted.secondHalf.home}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderThreeWaysSecondHalf}">
+                        <h:outputText value="#{notStarted.secondHalf.draw}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderThreeWaysSecondHalf}">
+                        <h:outputText value="#{notStarted.secondHalf.away}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderThreeWaysSecondHalf}">
+                        <h:outputText value="#{notStarted.secondHalf.tip}"/>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderGoals}">
+                        <h:outputText value="#{notStarted.secondHalfGoals.over}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderGoals}">
+                        <h:outputText value="#{notStarted.secondHalfGoals.under}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderGoals}">
+                        <h:outputText value="#{notStarted.secondHalfGoals.tip}"/>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderDoubleChance}">
+                        <h:outputText value="#{notStarted.doubleChance.oneX}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderDoubleChance}">
+                        <h:outputText value="#{notStarted.doubleChance.oneTwo}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderDoubleChance}">
+                        <h:outputText value="#{notStarted.doubleChance.XTwo}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderDoubleChance}">
+                        <h:outputText value="#{notStarted.doubleChance.tip}"/>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderBtts}">
+                        <h:outputText value="#{notStarted.btts.yes}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderBtts}">
+                        <h:outputText value="#{notStarted.btts.no}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderBtts}">
+                        <h:outputText value="#{notStarted.btts.tip}"/>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderGoals}">
+                        <h:outputText value="#{notStarted.overUnder.over}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderGoals}">
+                        <h:outputText value="#{notStarted.overUnder.under}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderGoals}">
+                        <h:outputText value="#{notStarted.overUnder.tip}"/>
+                    </p:column>
+                </p:dataTable>
+
+                <p:separator/>
+
+                <p:dataTable id="finishedMatchList" value="#{matchController.leagueFinished}"
+                             var="finished" selectionMode="single" style="background-color: #00a65a"
+                             rowKey="#{finished.id}">
+                    <f:facet name="header">
+                        Previous Round
+                    </f:facet>
+                    <p:columnGroup type="header">
+                        <p:row>
+                            <p:column colspan="2" rowspan="2" headerText="Home - Away" styleClass="ui-md-3" style="font-size: 80%; font-weight: bolder"/>
+                            <p:column colspan="4" headerText="1st Half" styleClass="ui-md-3" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysFirstHalf}"/>
+                            <p:column colspan="3" headerText="1st Half Over/Under 1.5" styleClass="ui-md-2" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column colspan="4" headerText="2nd Half" styleClass="ui-md-3" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysSecondHalf}"/>
+                            <p:column colspan="3" headerText="2nd Half Over/Under 1.5" styleClass="ui-md-2" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column colspan="4" headerText="Double Chance" styleClass="ui-md-3" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderDoubleChance}"/>
+                            <p:column colspan="3" headerText="BTTS" styleClass="ui-md-2" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderBtts}"/>
+                            <p:column colspan="3" headerText="Over/Under 2.5" styleClass="ui-md-2" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                        </p:row>
+                        <p:row>
+                            <p:column headerText="1" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysFirstHalf}"/>
+                            <p:column headerText="X" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysFirstHalf}"/>
+                            <p:column headerText="2" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysFirstHalf}"/>
+                            <p:column headerText="Tip" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysFirstHalf}"/>
+                            <p:column headerText="Over" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column headerText="Under" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column headerText="Tip" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column headerText="1" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysSecondHalf}"/>
+                            <p:column headerText="X" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysSecondHalf}"/>
+                            <p:column headerText="2" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysSecondHalf}"/>
+                            <p:column headerText="Tip" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderThreeWaysSecondHalf}"/>
+                            <p:column headerText="Over" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column headerText="Under" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column headerText="Tip" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column headerText="1X" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderDoubleChance}"/>
+                            <p:column headerText="12" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderDoubleChance}"/>
+                            <p:column headerText="X2" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderDoubleChance}"/>
+                            <p:column headerText="Tip" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderDoubleChance}"/>
+                            <p:column headerText="GG" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderBtts}"/>
+                            <p:column headerText="NG" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderBtts}"/>
+                            <p:column headerText="Tip" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderBtts}"/>
+                            <p:column headerText="Over" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column headerText="Under" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                            <p:column headerText="Tip" style="font-size: 80%; font-weight: bolder" rendered="#{matchController.renderGoals}"/>
+                        </p:row>
+                    </p:columnGroup>
+                    <p:column colspan="2" style="text-align: left; font-size: x-small; font-weight: bolder">
+                        <h:outputText value="#{finished.homeTeam.name} #{finished.awayTeam.name}"/>
+                        <p>
+                            <h:outputText value="#{finished.matchDate}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Africa/Lagos"/>
+                            </h:outputText>
+                            <h:outputText value=" "/>
+                            <h:outputText value="#{finished.matchTime}">
+                                <f:convertDateTime pattern="HH:mm:ss" timeZone="Africa/Lagos"/>
+                            </h:outputText>
+                        </p>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderThreeWaysFirstHalf}">
+                        <h:outputText value="#{finished.firstHalf.home}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderThreeWaysFirstHalf}">
+                        <h:outputText value="#{finished.firstHalf.draw}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderThreeWaysFirstHalf}">
+                        <h:outputText value="#{finished.firstHalf.away}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderThreeWaysFirstHalf}">
+                        <h:outputText value="#{finished.firstHalf.tip}"/>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderGoals}">
+                        <h:outputText value="#{finished.firstHalfGoals.over}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderGoals}">
+                        <h:outputText value="#{finished.firstHalfGoals.under}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderGoals}">
+                        <h:outputText value="#{finished.firstHalfGoals.tip}"/>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderThreeWaysSecondHalf}">
+                        <h:outputText value="#{finished.secondHalf.home}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderThreeWaysSecondHalf}">
+                        <h:outputText value="#{finished.secondHalf.draw}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderThreeWaysSecondHalf}">
+                        <h:outputText value="#{finished.secondHalf.away}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderThreeWaysSecondHalf}">
+                        <h:outputText value="#{finished.secondHalf.tip}"/>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderGoals}">
+                        <h:outputText value="#{finished.secondHalfGoals.over}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderGoals}">
+                        <h:outputText value="#{finished.secondHalfGoals.under}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderGoals}">
+                        <h:outputText value="#{finished.secondHalfGoals.tip}"/>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderDoubleChance}">
+                        <h:outputText value="#{finished.doubleChance.oneX}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderDoubleChance}">
+                        <h:outputText value="#{finished.doubleChance.oneTwo}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderDoubleChance}">
+                        <h:outputText value="#{finished.doubleChance.XTwo}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderDoubleChance}">
+                        <h:outputText value="#{finished.doubleChance.tip}"/>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderBtts}">
+                        <h:outputText value="#{finished.btts.yes}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderBtts}">
+                        <h:outputText value="#{finished.btts.no}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderBtts}">
+                        <h:outputText value="#{finished.btts.tip}"/>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderGoals}">
+                        <h:outputText value="#{finished.overUnder.over}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderGoals}">
+                        <h:outputText value="#{finished.overUnder.under}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align: center; font-size: x-small; font-weight: bold" rendered="#{matchController.renderGoals}">
+                        <h:outputText value="#{finished.overUnder.tip}"/>
+                    </p:column>
+                </p:dataTable>
+
+            </div>
+        </div>
+    </ui:define>
+
+    <ui:define name="content-end">
+        <div class="ui-g hidden">
+            <div class="ui-g-12 ui-g-nopad">
+                <div class="ui-g-6 ui-md-3 hidden-xs"><p:graphicImage library="images" name="1466448054450_154937.jpeg" style="width:100%"/></div>
+                <div class="ui-g-6 ui-md-3 hidden-xs"><p:graphicImage library="images" name="1466448054450_154937.jpeg" style="width:100%"/></div>
+                <div class="ui-g-6 ui-md-3"><p:graphicImage library="images" name="1466448054450_154937.jpeg" style="width:100%"/></div>
+                <div class="ui-g-6 ui-md-3"><p:graphicImage library="images" name="1466448054450_154937.jpeg" style="width:100%"/></div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

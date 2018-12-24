@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ul class="sidebar-menu tree" data-widget="tree">
+        <li>
+            <p:link outcome="/index" onclick="clearBreadCrumbs()">
+                <i class="fa fa-home"></i>
+                <span>Home</span>
+            </p:link>
+        </li>
+        <li class="header">
+            Available Leagues
+        </li>
+        <li>
+            <p:link outcome="/admin/administrator/List">
+                <i class="fa fa-user"></i>
+                <span>Admin</span>
+            </p:link>
+        </li>
+        <li>
+            <p:link outcome="/admin/country/List">
+                <i class="fa fa-futbol-o"></i>
+                <span>Country</span>
+            </p:link>
+        </li>
+        <li>
+            <p:link outcome="/admin/groups/List">
+                <i class="fa fa-users"></i>
+                <span>Groups</span>
+            </p:link>
+        </li>
+        <li>
+            <p:link outcome="/admin/league/List">
+                <i class="fa fa-futbol-o"></i>
+                <span>League</span>
+            </p:link>
+        </li>
+        <li>
+            <p:link outcome="/admin/matchStatus/List">
+                <i class="fa fa-gears"></i>
+                <span>Status</span>
+            </p:link>
+        </li>
+        <li>
+            <p:link outcome="/admin/matches/List">
+                <i class="fa fa-futbol-o"></i>
+                <span>Match</span>
+            </p:link>
+        </li>
+        <li>
+            <p:link outcome="/admin/season/List">
+                <i class="fa fa-futbol-o"></i>
+                <span>Season</span>
+            </p:link>
+        </li>
+        <li>
+            <p:link outcome="/admin/team/List">
+                <i class="fa fa-futbol-o"></i>
+                <span>Team</span>
+            </p:link>
+        </li>
+    </ul>
+
+</ui:composition>

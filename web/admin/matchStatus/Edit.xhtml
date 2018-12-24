@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="MatchStatusEditDlg" widgetVar="MatchStatusEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg['EditMatchStatusTitle']}">
+        <h:form id="MatchStatusEditForm">
+            <h:panelGroup id="display">
+                <p:panelGrid columns="2" rendered="#{matchStatusController.selected != null}">
+                    <p:outputLabel value="#{msg['EditMatchStatusLabel_status']}" for="status" />
+                    <p:inputText id="status" value="#{matchStatusController.selected.status}" title="#{msg['EditMatchStatusTitle_status']}" />
+                </p:panelGrid>
+                <p:commandButton actionListener="#{matchStatusController.update}" value="#{msg['Save']}" update="display,:MatchStatusListForm:datalist,:growl" onclick="PF('statusDialog').show()" oncomplete="handleSubmit(args, 'MatchStatusEditDialog');"/>
+                <p:commandButton value="#{msg['Cancel']}" type="button" onclick="PF('MatchStatusEditDialog').hide()"/>
+            </h:panelGroup>
+        </h:form>
+    </p:dialog>
+
+</ui:composition>

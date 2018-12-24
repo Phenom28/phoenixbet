@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:dialog id="ExcelsMatchDlg" widgetVar="ExcelsMatchDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg['CreateMatchesTitle']}"
+              closeOnEscape="true" responsive="true">
+        <h:form id="ExcelsMatchForm" enctype="multipart/form-data">
+            <h:panelGroup id="display">
+                <p:panelGrid columns="2" rendered="#{matchesController.selected != null}">
+                    <p:outputLabel value="Upload"/>
+                    <p:fileUpload fileUploadListener="#{matchesController.handleFileUpload}" mode="advanced" skinSimple="true"
+                                  allowTypes="/(\.|\/)(xls|xlsx)$/"/>
+                    <p:outputLabel value="Sheet" for="sheet"/>
+                    <p:inputText id="sheet" value="#{matchesController.sheet}"/>
+                    <p:outputLabel value="Start Row" for="startRow"/>
+                    <p:inputNumber id="startRow" value="#{matchesController.firstRow}"/>
+                    <p:outputLabel value="Last Row" for="lastRow"/>
+                    <p:inputNumber id="lastRow" value="#{matchesController.lastRow}"/>
+                    <p:outputLabel value="MatchDate" for="matchDate"/>
+                    <p:inputNumber id="matchDate" value="#{matchesController.date}"/>
+                    <p:outputLabel value="Home" for="home"/>
+                    <p:inputNumber id="home" value="#{matchesController.homeTeam}"/>
+                    <p:outputLabel value="Away" for="away"/>
+                    <p:inputNumber id="away" value="#{matchesController.awayTeam}"/>
+                    <p:outputLabel value="#{msg['CreateMatchesLabel_matchRound']}" for="matchRound" />
+                    <p:inputNumber id="matchRound" padControl="false" value="#{matchesController.round}" title="#{msg['CreateMatchesTitle_matchRound']}" required="true" requiredMessage="#{msg['CreateMatchesRequiredMessage_matchRound']}"/>
+                    <p:outputLabel value="#{msg['CreateMatchesLabel_league']}" for="leagueId" />
+                    <p:selectOneMenu id="leagueId" value="#{matchesController.leag}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_league']}"
+                                     var="leag">
+                        <f:selectItems value="#{leagueController.leaguesAvailableSelectOne}"
+                                       var="league"
+                                       itemLabel="#{league.name}"
+                                       itemValue="#{league}"/>
+                        <p:column>
+                            <h:outputText value="#{leag.country.name}"/>
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="#{leag.name}"/>
+                        </p:column>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{msg['CreateMatchesLabel_matchStatus']}" for="matchStatus" />
+                    <p:selectOneMenu id="matchStatus" value="#{matchesController.status}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_matchStatus']}">
+                        <f:selectItems value="#{matchStatusController.matchStatusesAvailableSelectOne}"
+                                       var="matchStatus"
+                                       itemValue="#{matchStatus.id}"
+                                       itemLabel="#{matchStatus.status}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{msg['CreateMatchesLabel_season']}" for="season" />
+                    <p:selectOneMenu id="season" value="#{matchesController.season}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_season']}">
+                        <f:selectItems value="#{seasonController.seasonsAvailableSelectOne}"
+                                       var="season"
+                                       itemValue="#{season.id}"
+                                       itemLabel="#{season.year}"/>
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                <p:commandButton actionListener="#{matchesController.createFromExcel}" value="#{msg['Save']}" onclick="PF('statusDialog').show()" update="display,:growl,@(.ui-panel)" oncomplete="handleSubmit(args,'ExcelsMatchDialog');"/>
+                <p:commandButton value="#{msg['Cancel']}" type="button" onclick="PF('ExcelsMatchDialog').hide()"/>
+                <p:commandButton actionListener="#{matchesController.prepareExcel2}" onclick="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" value="Prepare" update=":ExcelsMatchForm"/>
+            </h:panelGroup>
+        </h:form>
+    </p:dialog>
+
+</ui:composition>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="CountryViewDlg" widgetVar="CountryViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg['ViewCountryTitle']}">
+        <h:form id="CountryViewForm">
+            <h:panelGroup id="display">
+                <p:panelGrid columns="2" rendered="#{countryController.selected != null}">
+                    <h:outputText value="#{msg['ViewCountryLabel_id']}"/>
+                    <h:outputText value="#{countryController.selected.id}" title="#{msg['ViewCountryTitle_id']}"/>
+                    <h:outputText value="#{msg['ViewCountryLabel_name']}"/>
+                    <h:outputText value="#{countryController.selected.name}" title="#{msg['ViewCountryTitle_name']}"/>
+                    <h:outputText value="#{msg['ViewCountryLabel_img']}"/>
+                    <h:outputText value="#{countryController.selected.img}" title="#{msg['ViewCountryTitle_img']}"/>
+                    <h:outputText value="#{msg['ViewCountryLabel_imgSrc']}"/>
+                    <h:outputText value="#{countryController.selected.imgSrc}" title="#{msg['ViewCountryTitle_imgSrc']}"/>
+                </p:panelGrid>
+                <p:commandButton value="#{msg['Close']}" type="button" onclick="PF('CountryViewDialog').hide()"/>
+            </h:panelGroup>
+        </h:form>
+    </p:dialog>
+
+</ui:composition>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/admintemplate.xhtml">
+
+    <ui:define name="metadata">
+        <ui:param name="title" value="#{msg['ListCountryTitle']}"/> <!-- Automatic create breadCrumb and page title when param 'title' is provided. --> 
+
+        <style type="text/css">
+            .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form id="CountryListForm">
+            <p:panel header="#{msg['ListCountryTitle']}">
+                <p:dataTable id="datalist" value="#{countryController.countries}" var="country"
+                             selectionMode="single" selection="#{countryController.selected}"
+                             paginator="true"
+                             rowKey="#{country.id}"
+                             rows="10"
+                             paginatorPosition="bottom"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             >
+
+                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListCountryTitle_id']}"/>
+                        </f:facet>
+                        <h:outputText value="#{country.id}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListCountryTitle_name']}"/>
+                        </f:facet>
+                        <h:outputText value="#{country.name}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListCountryTitle_img']}"/>
+                        </f:facet>
+                        <h:outputText value="#{country.img}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListCountryTitle_imgSrc']}"/>
+                        </f:facet>
+                        <h:outputText value="#{country.imgSrc}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{msg['Create']}" actionListener="#{countryController.prepareCreate}" update=":CountryCreateForm" oncomplete="PF('CountryCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{msg['View']}" update=":CountryViewForm" oncomplete="PF('CountryViewDialog').show()" disabled="#{empty countryController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{msg['Edit']}" update=":CountryEditForm" oncomplete="PF('CountryEditDialog').show()" disabled="#{empty countryController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{msg['Delete']}" actionListener="#{countryController.destroy}" update=":growl,datalist" disabled="#{empty countryController.selected}"/>
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+
+        <ui:include src="Create.xhtml"/>
+        <ui:include src="Edit.xhtml"/>
+        <ui:include src="View.xhtml"/>
+    </ui:define>
+</ui:composition>

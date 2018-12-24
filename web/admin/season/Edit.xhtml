@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="SeasonEditDlg" widgetVar="SeasonEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg['EditSeasonTitle']}">
+        <h:form id="SeasonEditForm">
+            <h:panelGroup id="display">
+                <p:panelGrid columns="2" rendered="#{seasonController.selected != null}">
+                    <p:outputLabel value="#{msg['EditSeasonLabel_year']}" for="year" />
+                    <p:inputText id="year" value="#{seasonController.selected.year}" title="#{msg['EditSeasonTitle_year']}" />
+                </p:panelGrid>
+                <p:commandButton actionListener="#{seasonController.update}" value="#{msg['Save']}" update="display,:SeasonListForm:datalist,:growl" onclick="PF('statusDialog').show()" oncomplete="handleSubmit(args, 'SeasonEditDialog');"/>
+                <p:commandButton value="#{msg['Cancel']}" type="button" onclick="SeasonEditDialog.hide()"/>
+            </h:panelGroup>
+        </h:form>
+    </p:dialog>
+
+</ui:composition>

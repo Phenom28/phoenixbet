@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:dialog id="MatchCreateExcelDlg" widgetVar="MatchCreateExcelDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg['CreateMatchesTitle']}"
+              closeOnEscape="true" responsive="true">
+        <h:form id="ExcelMatchCreateForm" enctype="multipart/form-data">
+            <h:panelGroup id="display">
+                <p:panelGrid columns="2" rendered="#{matchesController.selected != null}">
+                    <p:outputLabel value="Upload"/>
+                    <p:fileUpload fileUploadListener="#{matchesController.handleFileUpload}" mode="advanced" skinSimple="true"
+                                  allowTypes="/(\.|\/)(xls|xlsx)$/"/>
+                    <p:outputLabel value="Sheet" for="sheet"/>
+                    <p:inputText id="sheet" value="#{matchesController.sheet}"/>
+                    <p:outputLabel value="Row" for="row"/>
+                    <p:inputNumber id="row" value="#{matchesController.row}"/>
+                    <p:outputLabel value="MatchDate" for="matchDate"/>
+                    <p:inputNumber id="matchDate" value="#{matchesController.date}"/>
+                    <p:outputLabel value="Home" for="home"/>
+                    <p:inputNumber id="home" value="#{matchesController.homeTeam}"/>
+                    <p:outputLabel value="Away" for="away"/>
+                    <p:inputNumber id="away" value="#{matchesController.awayTeam}"/>
+                    <p:outputLabel value="FullHGoal" for="fullHGoal"/>
+                    <p:inputNumber id="fullHGoal" value="#{matchesController.fullTimeHomeGoal}"/>
+                    <p:outputLabel value="FullAGoal" for="fullAGoal"/>
+                    <p:inputNumber id="fullAGoal" value="#{matchesController.fullTimeAwayGoal}"/>
+                    <p:outputLabel value="HalfHGoal" for="halfHGoal"/>
+                    <p:inputNumber id="halfHGoal" value="#{matchesController.halfTimeHomeGoal}"/>
+                    <p:outputLabel value="HalfAGoal" for="halfAGoal"/>
+                    <p:inputNumber id="halfAGoal" value="#{matchesController.halfTimeAwayGoal}"/>
+                    <p:outputLabel value="HomeShot" for="homeShot"/>
+                    <p:inputNumber id="homeShot" value="#{matchesController.homeShot}"/>
+                    <p:outputLabel value="AwayShot" for="awayShot"/>
+                    <p:inputNumber id="awayShot" value="#{matchesController.awayShot}"/>
+                    <p:outputLabel value="HomeTarget" for="homeTarget"/>
+                    <p:inputNumber id="homeTarget" value="#{matchesController.homeShotOnTarget}"/>
+                    <p:outputLabel value="AwayTarget" for="awayTarget"/>
+                    <p:inputNumber id="awayTarget" value="#{matchesController.awayShotOnTarget}"/>
+                    <p:outputLabel value="HomeFoul" for="homeFoul"/>
+                    <p:inputNumber id="homeFoul" value="#{matchesController.homeFoul}"/>
+                    <p:outputLabel value="AwayFoul" for="awayFoul"/>
+                    <p:inputNumber id="awayFoul" value="#{matchesController.awayFoul}"/>
+                    <p:outputLabel value="HomeCorner" for="homeCorner"/>
+                    <p:inputNumber id="homeCorner" value="#{matchesController.homeCorner}"/>
+                    <p:outputLabel value="AwayCorner" for="awayCorner"/>
+                    <p:inputNumber id="awayCorner" value="#{matchesController.awayCorner}"/>
+                    <p:outputLabel value="HomeYellow" for="homeYellow"/>
+                    <p:inputNumber id="homeYellow" value="#{matchesController.homeYellow}"/>
+                    <p:outputLabel value="AwayYellow" for="awayYellow"/>
+                    <p:inputNumber id="awayYellow" value="#{matchesController.awayYellow}"/>
+                    <p:outputLabel value="HomeRed" for="homeRed"/>
+                    <p:inputNumber id="homeRed" value="#{matchesController.homeRed}"/>
+                    <p:outputLabel value="AwayRed" for="AwayRed"/>
+                    <p:inputNumber id="AwayRed" value="#{matchesController.awayRed}"/>
+                    <p:outputLabel value="#{msg['CreateMatchesLabel_matchDate']}" for="date" />
+                    <p:calendar readonly="true" id="date" timeZone="Africa/Lagos" pattern="dd/MM/yyyy" value="#{matchesController.selected.matchDate}" title="#{msg['EditMatchesTitle_matchDate']}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_date']}" showOn="button"/>
+                    <p:outputLabel value="#{msg['CreateMatchesLabel_matchTime']}" for="time" />
+                    <p:calendar timeControlType="slider" id="time" timeZone="Africa/Lagos" timeOnly="true" pattern="HH:mm:ss" value="#{matchesController.selected.matchTime}" title="#{msg['EditMatchesTitle_matchTime']}" showOn="button"/>
+                    <p:outputLabel value="#{msg['CreateMatchesLabel_matchRound']}" for="matchRound" />
+                    <p:inputNumber id="matchRound" decimalPlaces="0" value="#{matchesController.selected.matchRound}" title="#{msg['CreateMatchesTitle_matchRound']}" required="true" requiredMessage="#{msg['CreateMatchesRequiredMessage_matchRound']}"/>
+                    <p:outputLabel value="#{msg['CreateMatchesLabel_fullTimeHomeGoal']}" for="fullTimeHomeGoal" />
+                    <h:outputText id="fullTimeHomeGoal" value="#{matchesController.selected.fullTimeHomeGoal}" title="#{msg['CreateMatchesTitle_fullTimeHomeGoal']}" />
+                    <p:outputLabel value="#{msg['CreateMatchesLabel_fullTimeAwayGoal']}" for="fullTimeAwayGoal" />
+                    <h:outputText id="fullTimeAwayGoal" value="#{matchesController.selected.fullTimeAwayGoal}" title="#{msg['CreateMatchesTitle_fullTimeAwayGoal']}" />
+                    <p:outputLabel value="#{msg['CreateMatchesLabel_halfTimeHomeGoal']}" for="halfTimeHomeGoal" />
+                    <h:outputText id="halfTimeHomeGoal" value="#{matchesController.selected.halfTimeHomeGoal}" title="#{msg['CreateMatchesTitle_halfTimeHomeGoal']}" />
+                    <p:outputLabel value="#{msg['CreateMatchesLabel_halfTimeAwayGoal']}" for="halfTimeAwayGoal" />
+                    <h:outputText id="halfTimeAwayGoal" value="#{matchesController.selected.halfTimeAwayGoal}" title="#{msg['CreateMatchesTitle_halfTimeAwayGoal']}" />
+                    <p:outputLabel value="#{msg['CreateMatchesLabel_homeTeam']}" for="homeTeamId" />
+                    <h:outputText id="homeTeamId" value="#{matchesController.selected.homeTeam.name}"/>
+                    <p:outputLabel value="#{msg['CreateMatchesLabel_awayTeam']}" for="awayTeamId" />
+                    <h:outputText id="awayTeamId" value="#{matchesController.selected.awayTeam.name}"/>
+                    <p:outputLabel value="#{msg['CreateMatchesLabel_league']}" for="leagueId" />
+                    <p:selectOneMenu id="leagueId" value="#{matchesController.selected.league}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_league']}"
+                                     var="leag">
+                        <f:selectItems value="#{leagueController.leaguesAvailableSelectOne}"
+                                       var="league"
+                                       itemLabel="#{league.name}"
+                                       itemValue="#{league}"/>
+                        <p:column>
+                            <h:outputText value="#{leag.country.name}"/>
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="#{leag.name}"/>
+                        </p:column>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{msg['CreateMatchesLabel_matchStatus']}" for="matchStatus" />
+                    <p:selectOneMenu id="matchStatus" value="#{matchesController.selected.matchStatus}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_matchStatus']}">
+                        <f:selectItems value="#{matchStatusController.matchStatusesAvailableSelectOne}"
+                                       var="matchStatus"
+                                       itemValue="#{matchStatus}"
+                                       itemLabel="#{matchStatus.status}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{msg['CreateMatchesLabel_season']}" for="season" />
+                    <p:selectOneMenu id="season" value="#{matchesController.selected.season}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_season']}">
+                        <f:selectItems value="#{seasonController.seasonsAvailableSelectOne}"
+                                       var="season"
+                                       itemValue="#{season}"
+                                       itemLabel="#{season.year}"/>
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                <p:commandButton actionListener="#{matchesController.create}" value="#{msg['Save']}" update="display,:growl,@(.ui-panel)" onclick="PF('statusDialog').show()" oncomplete="handleSubmit(args,'MatchCreateExcelDialog');"/>
+                <p:commandButton actionListener="#{matchesController.createNoPredict}" value="Save No Prediction" update="display,:growl,@(.ui-panel)" onclick="PF('statusDialog').show()" oncomplete="handleSubmit(args,'MatchCreateExcelDialog');"/>
+                <p:commandButton value="#{msg['Cancel']}" type="button" onclick="PF('MatchCreateExcelDialog').hide()"/>
+                <p:commandButton actionListener="#{matchesController.setMatch}" onclick="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" value="Get Match" update=":ExcelMatchCreateForm"/>
+            </h:panelGroup>
+        </h:form>
+    </p:dialog>
+
+</ui:composition>

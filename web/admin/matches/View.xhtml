@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="MatchesViewDlg" widgetVar="MatchesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg['ViewMatchesTitle']}">
+        <h:form id="MatchesViewForm">
+            <h:panelGroup id="display">
+                <p:panelGrid columns="2" rendered="#{matchesController.selected != null}">
+                    <h:outputText value="#{msg['ViewMatchesLabel_id']}"/>
+                    <h:outputText value="#{matchesController.selected.id}" title="#{msg['ViewMatchesTitle_id']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_matchDate']}"/>
+                    <h:outputText value="#{matchesController.selected.matchDate}" title="#{msg['ViewMatchesTitle_matchDate']}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                    <h:outputText value="#{msg['ViewMatchesLabel_matchTime']}"/>
+                    <h:outputText value="#{matchesController.selected.matchTime}" title="#{msg['ViewMatchesTitle_matchTime']}">
+                        <f:convertDateTime pattern="HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{msg['ViewMatchesLabel_matchRound']}"/>
+                    <h:outputText value="#{matchesController.selected.matchRound}" title="#{msg['ViewMatchesTitle_matchRound']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_fullTimeHomeGoal']}"/>
+                    <h:outputText value="#{matchesController.selected.fullTimeHomeGoal}" title="#{msg['ViewMatchesTitle_fullTimeHomeGoal']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_fullTimeAwayGoal']}"/>
+                    <h:outputText value="#{matchesController.selected.fullTimeAwayGoal}" title="#{msg['ViewMatchesTitle_fullTimeAwayGoal']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_halfTimeHomeGoal']}"/>
+                    <h:outputText value="#{matchesController.selected.halfTimeHomeGoal}" title="#{msg['ViewMatchesTitle_halfTimeHomeGoal']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_halfTimeAwayGoal']}"/>
+                    <h:outputText value="#{matchesController.selected.halfTimeAwayGoal}" title="#{msg['ViewMatchesTitle_halfTimeAwayGoal']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_homeShot']}"/>
+                    <h:outputText value="#{matchesController.selected.homeShot}" title="#{msg['ViewMatchesTitle_homeShot']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_awayShot']}"/>
+                    <h:outputText value="#{matchesController.selected.awayShot}" title="#{msg['ViewMatchesTitle_awayShot']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_homeShotOnTarget']}"/>
+                    <h:outputText value="#{matchesController.selected.homeShotOnTarget}" title="#{msg['ViewMatchesTitle_homeShotOnTarget']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_awayShotOnTarget']}"/>
+                    <h:outputText value="#{matchesController.selected.awayShotOnTarget}" title="#{msg['ViewMatchesTitle_awayShotOnTarget']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_homeFoul']}"/>
+                    <h:outputText value="#{matchesController.selected.homeFoul}" title="#{msg['ViewMatchesTitle_homeFoul']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_awayFoul']}"/>
+                    <h:outputText value="#{matchesController.selected.awayFoul}" title="#{msg['ViewMatchesTitle_awayFoul']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_homeCorner']}"/>
+                    <h:outputText value="#{matchesController.selected.homeCorner}" title="#{msg['ViewMatchesTitle_homeCorner']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_awayCorner']}"/>
+                    <h:outputText value="#{matchesController.selected.awayCorner}" title="#{msg['ViewMatchesTitle_awayCorner']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_homeYellow']}"/>
+                    <h:outputText value="#{matchesController.selected.homeYellow}" title="#{msg['ViewMatchesTitle_homeYellow']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_awayYellow']}"/>
+                    <h:outputText value="#{matchesController.selected.awayYellow}" title="#{msg['ViewMatchesTitle_awayYellow']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_homeRed']}"/>
+                    <h:outputText value="#{matchesController.selected.homeRed}" title="#{msg['ViewMatchesTitle_homeRed']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_awayRed']}"/>
+                    <h:outputText value="#{matchesController.selected.awayRed}" title="#{msg['ViewMatchesTitle_awayRed']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_firstHalf']}"/>
+                    <h:outputText value="#{matchesController.selected.firstHalf}" title="#{msg['ViewMatchesTitle_firstHalf']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_matchStatus']}"/>
+                    <h:outputText value="#{matchesController.selected.matchStatus}" title="#{msg['ViewMatchesTitle_matchStatus']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_season']}"/>
+                    <h:outputText value="#{matchesController.selected.season}" title="#{msg['ViewMatchesTitle_season']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_league']}"/>
+                    <h:outputText value="#{matchesController.selected.league}" title="#{msg['ViewMatchesTitle_league']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_homeTeam']}"/>
+                    <h:outputText value="#{matchesController.selected.homeTeam}" title="#{msg['ViewMatchesTitle_homeTeam']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_awayTeam']}"/>
+                    <h:outputText value="#{matchesController.selected.awayTeam}" title="#{msg['ViewMatchesTitle_awayTeam']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_overUnder']}"/>
+                    <h:outputText value="#{matchesController.selected.overUnder}" title="#{msg['ViewMatchesTitle_overUnder']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_secondHalf']}"/>
+                    <h:outputText value="#{matchesController.selected.secondHalf}" title="#{msg['ViewMatchesTitle_secondHalf']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_secondHalfGoals']}"/>
+                    <h:outputText value="#{matchesController.selected.secondHalfGoals}" title="#{msg['ViewMatchesTitle_secondHalfGoals']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_firstHalfGoals']}"/>
+                    <h:outputText value="#{matchesController.selected.firstHalfGoals}" title="#{msg['ViewMatchesTitle_firstHalfGoals']}"/>
+                    <h:outputText value="#{msg['ViewMatchesLabel_btts']}"/>
+                    <h:outputText value="#{matchesController.selected.btts}" title="#{msg['ViewMatchesTitle_btts']}"/>
+                </p:panelGrid>
+                <p:commandButton value="#{msg['Close']}" type="button" onclick="PF('MatchesViewDialog').hide()"/>
+            </h:panelGroup>
+        </h:form>
+    </p:dialog>
+
+</ui:composition>

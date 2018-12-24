@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="AdministratorViewDlg" widgetVar="AdministratorViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg['ViewAdministratorTitle']}">
+        <h:form id="AdministratorViewForm">
+            <h:panelGroup id="display">
+                <p:panelGrid columns="2" rendered="#{administratorController.selected != null}">
+                    <h:outputText value="#{msg['ViewAdministratorLabel_id']}"/>
+                    <h:outputText value="#{administratorController.selected.id}" title="#{msg['ViewAdministratorTitle_id']}"/>
+                    <h:outputText value="#{msg['ViewAdministratorLabel_firstName']}"/>
+                    <h:outputText value="#{administratorController.selected.firstName}" title="#{msg['ViewAdministratorTitle_firstName']}"/>
+                    <h:outputText value="#{msg['ViewAdministratorLabel_lastName']}"/>
+                    <h:outputText value="#{administratorController.selected.lastName}" title="#{msg['ViewAdministratorTitle_lastName']}"/>
+                    <h:outputText value="#{msg['ViewAdministratorLabel_userName']}"/>
+                    <h:outputText value="#{administratorController.selected.userName}" title="#{msg['ViewAdministratorTitle_userName']}"/>
+                    <h:outputText value="#{msg['ViewAdministratorLabel_password']}"/>
+                    <h:outputText value="#{administratorController.selected.password}" title="#{msg['ViewAdministratorTitle_password']}"/>
+                    <h:outputText value="#{msg['ViewAdministratorLabel_dateCreated']}"/>
+                    <h:outputText value="#{administratorController.selected.dateCreated}" title="#{msg['ViewAdministratorTitle_dateCreated']}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:panelGrid>
+                <p:commandButton value="#{msg['Close']}" type="button" onclick="PF('AdministratorViewDialog').hide()"/>
+            </h:panelGroup>
+        </h:form>
+    </p:dialog>
+
+</ui:composition>

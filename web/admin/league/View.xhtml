@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="LeagueViewDlg" widgetVar="LeagueViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg['ViewLeagueTitle']}">
+        <h:form id="LeagueViewForm">
+            <h:panelGroup id="display">
+                <p:panelGrid columns="2" rendered="#{leagueController.selected != null}">
+                    <h:outputText value="#{msg['ViewLeagueLabel_id']}"/>
+                    <h:outputText value="#{leagueController.selected.id}" title="#{msg['ViewLeagueTitle_id']}"/>
+                    <h:outputText value="#{msg['ViewLeagueLabel_name']}"/>
+                    <h:outputText value="#{leagueController.selected.name}" title="#{msg['ViewLeagueTitle_name']}"/>
+                    <h:outputText value="#{msg['ViewLeagueLabel_leagueAbbre']}"/>
+                    <h:outputText value="#{leagueController.selected.leagueAbbre}" title="#{msg['ViewLeagueTitle_leagueAbbre']}"/>
+                    <h:outputText value="#{msg['ViewLeagueLabel_country']}"/>
+                    <h:outputText value="#{leagueController.selected.country}" title="#{msg['ViewLeagueTitle_country']}"/>
+                </p:panelGrid>
+                <p:commandButton value="#{msg['Close']}" type="button" onclick="PF('LeagueViewDialog').hide()"/>
+            </h:panelGroup>
+        </h:form>
+    </p:dialog>
+
+</ui:composition>

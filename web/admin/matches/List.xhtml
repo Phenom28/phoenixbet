@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/admintemplate.xhtml">
+
+    <ui:define name="metadata">
+        <ui:param name="title" value="#{msg['ListMatchesTitle']}"/> <!-- Automatic create breadCrumb and page title when param 'title' is provided. --> 
+
+        <style type="text/css">
+            .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form id="MatchesListForm">
+            <p:panel header="#{msg['ListMatchesTitle']}">
+                <p:selectOneMenu id="selectByStat" value="#{matchesController.league}"
+                                 autoWidth="true" dynamic="true" filter="true" filterMatchMode="contains" filterPlaceholder="Find..">
+                    <p:ajax event="itemSelect" update="@(.ui-panel)"/>
+                    <f:selectItem itemLabel="Select One" itemValue=""/>
+                    <f:selectItems value="#{matchesController.leagues}"/>
+                </p:selectOneMenu>
+                <p:separator/>
+                <p:dataTable id="notStartedMatches" value="#{matchesController.notStartedMatches}" var="notStarted"
+                             selectionMode="single" selection="#{matchesController.selected}" paginator="true"
+                             rowKey="#{notStarted.id}" rows="10" paginatorPosition="bottom"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
+
+                    <p:ajax event="rowSelect"   update="createButton viewButton editButton editExcel deleteButton"/>
+                    <p:ajax event="rowUnselect" update="createButton viewButton editButton editExcel deleteButton"/>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_id']}"/>
+                        </f:facet>
+                        <h:outputText value="#{notStarted.id}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_matchDate']}"/>
+                        </f:facet>
+                        <h:outputText value="#{notStarted.matchDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Africa/Lagos"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_matchTime']}"/>
+                        </f:facet>
+                        <h:outputText value="#{notStarted.matchTime}">
+                            <f:convertDateTime pattern="HH:mm:ss" timeZone="Africa/Lagos"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_matchRound']}"/>
+                        </f:facet>
+                        <h:outputText value="#{notStarted.matchRound}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_fullTimeHomeGoal']}"/>
+                        </f:facet>
+                        <h:outputText value="#{notStarted.fullTimeHomeGoal}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_fullTimeAwayGoal']}"/>
+                        </f:facet>
+                        <h:outputText value="#{notStarted.fullTimeAwayGoal}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_halfTimeHomeGoal']}"/>
+                        </f:facet>
+                        <h:outputText value="#{notStarted.halfTimeHomeGoal}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_halfTimeAwayGoal']}"/>
+                        </f:facet>
+                        <h:outputText value="#{notStarted.halfTimeAwayGoal}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_firstHalf']}"/>
+                        </f:facet>
+                        <h:outputText value="#{notStarted.firstHalf}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_homeTeam']}"/>
+                        </f:facet>
+                        <h:outputText value="#{notStarted.homeTeam.name}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_awayTeam']}"/>
+                        </f:facet>
+                        <h:outputText value="#{notStarted.awayTeam.name}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_overUnder']}"/>
+                        </f:facet>
+                        <h:outputText value="#{notStarted.overUnder.over}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_secondHalf']}"/>
+                        </f:facet>
+                        <h:outputText value="#{notStarted.secondHalf}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_secondHalfGoals']}"/>
+                        </f:facet>
+                        <h:outputText value="#{notStarted.secondHalfGoals}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_firstHalfGoals']}"/>
+                        </f:facet>
+                        <h:outputText value="#{notStarted.firstHalfGoals}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_btts']}"/>
+                        </f:facet>
+                        <h:outputText value="#{notStarted.btts}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus" global="true"   value="#{msg['Create']}" actionListener="#{matchesController.prepareCreate}" update=":MatchesCreateForm" oncomplete="PF('MatchesCreateDialog').show()"/>
+                        <p:commandButton id="createExcelButton" icon="ui-icon-plus" global="true" value="GetExcel" actionListener="#{matchesController.prepareCreate}" update=":ExcelMatchCreateForm" oncomplete="PF('MatchCreateExcelDialog').show()"/>
+                        <p:commandButton id="createExcelsButton" icon="ui-icon-plus" global="true" value="Get Matches" actionListener="#{matchesController.prepareCreate}" update=":ExcelsMatchCreateForm" oncomplete="PF('ExcelsMatchCreateDialog').show()"/>
+                        <p:commandButton id="createFromExcel" icon="ui-icon-plus" global="true" value="Not Started" actionListener="#{matchesController.prepareCreate}" update=":ExcelsMatchForm" oncomplete="PF('ExcelsMatchDialog').show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{msg['View']}" update=":MatchesViewForm" oncomplete="PF('MatchesViewDialog').show()" disabled="#{empty matchesController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{msg['Edit']}" update=":MatchesEditForm" oncomplete="PF('MatchesEditDialog').show()" disabled="#{empty matchesController.selected}"/>
+                        <p:commandButton id="editExcel" icon="ui-icon-pencil" value="Edit with Excel" update=":MatchesEditExcelForm" oncomplete="PF('MatchesEditExcelDialog').show()" disabled="#{empty matchesController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{msg['Delete']}" actionListener="#{matchesController.destroy}" update=":growl,@(.ui-panel)" disabled="#{empty matchesController.selected}"/>
+                    </f:facet>
+                </p:dataTable>
+
+                <p:separator/>
+
+                <p:dataTable id="previousMatches" value="#{matchesController.finishedMatches}" var="finishedMatches"
+                             selectionMode="single" paginator="true" rowKey="#{finishedMatches.id}"
+                             rows="10" paginatorPosition="bottom" rowsPerPageTemplate="5,8,9,10,12,20,30,40,50"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_id']}"/>
+                        </f:facet>
+                        <h:outputText value="#{finishedMatches.id}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_matchDate']}"/>
+                        </f:facet>
+                        <h:outputText value="#{finishedMatches.matchDate}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Africa/Lagos"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_matchTime']}"/>
+                        </f:facet>
+                        <h:outputText value="#{finishedMatches.matchTime}">
+                            <f:convertDateTime pattern="HH:mm:ss" timeZone="Africa/Lagos"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_matchRound']}"/>
+                        </f:facet>
+                        <h:outputText value="#{finishedMatches.matchRound}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_fullTimeHomeGoal']}"/>
+                        </f:facet>
+                        <h:outputText value="#{finishedMatches.fullTimeHomeGoal}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_fullTimeAwayGoal']}"/>
+                        </f:facet>
+                        <h:outputText value="#{finishedMatches.fullTimeAwayGoal}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_halfTimeHomeGoal']}"/>
+                        </f:facet>
+                        <h:outputText value="#{finishedMatches.halfTimeHomeGoal}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_halfTimeAwayGoal']}"/>
+                        </f:facet>
+                        <h:outputText value="#{finishedMatches.halfTimeAwayGoal}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_firstHalf']}"/>
+                        </f:facet>
+                        <h:outputText value="#{finishedMatches.firstHalf}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_homeTeam']}"/>
+                        </f:facet>
+                        <h:outputText value="#{finishedMatches.homeTeam.name}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_awayTeam']}"/>
+                        </f:facet>
+                        <h:outputText value="#{finishedMatches.awayTeam.name}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_overUnder']}"/>
+                        </f:facet>
+                        <h:outputText value="#{finishedMatches.overUnder.over}">
+                            <f:convertNumber maxFractionDigits="2" type="percent"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_secondHalf']}"/>
+                        </f:facet>
+                        <h:outputText value="#{finishedMatches.secondHalf}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_secondHalfGoals']}"/>
+                        </f:facet>
+                        <h:outputText value="#{finishedMatches.secondHalfGoals}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_firstHalfGoals']}"/>
+                        </f:facet>
+                        <h:outputText value="#{finishedMatches.firstHalfGoals}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['ListMatchesTitle_btts']}"/>
+                        </f:facet>
+                        <h:outputText value="#{finishedMatches.btts}"/>
+                    </p:column>
+                </p:dataTable>
+ 
+            </p:panel>
+        </h:form>
+
+        <ui:include src="Create.xhtml"/>
+        <ui:include src="CreateFromExcel.xhtml"/>
+        <ui:include src="CreateFromExcels.xhtml"/>
+        <ui:include src="CreateExcel.xhtml"/>
+        <ui:include src="Edit.xhtml"/>
+        <ui:include src="EditWithExcel.xhtml"/>
+        <ui:include src="View.xhtml"/>
+    </ui:define>
+</ui:composition>

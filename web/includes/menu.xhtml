@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ul class="sidebar-menu tree" data-widget="tree">
+        <li>
+            <p:link outcome="/index" onclick="clearBreadCrumbs()">
+                <i class="fa fa-home"></i>
+                <span>Home</span>
+            </p:link>
+        </li>
+        <li class="header">
+            Available Leagues
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-futbol-o"></i>
+                <span>England</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>Premier League</span>
+                        <f:param name="League" value="1"/>
+                    </p:link>
+                </li>
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>Championship</span>
+                        <f:param name="League" value="2"/>
+                    </p:link>
+                </li>
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>League One</span>
+                        <f:param name="League" value="3"/>
+                    </p:link>
+                </li>
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>League Two</span>
+                        <f:param name="League" value="4"/>
+                    </p:link>
+                </li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-futbol-o"></i>
+                <span>Spain</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>Primera Division</span>
+                        <f:param name="League" value="11"/>
+                    </p:link>
+                </li>
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>Segunda Division</span>
+                        <f:param name="League" value="12"/>
+                    </p:link>
+                </li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-futbol-o"></i>
+                <span>Italy</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>Serie A</span>
+                        <f:param name="League" value="13"/>
+                    </p:link>
+                </li>
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>Serie B</span>
+                        <f:param name="League" value="14"/>
+                    </p:link>
+                </li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-futbol-o"></i>
+                <span>France</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>Ligue 1</span>
+                        <f:param name="League" value="15"/>
+                    </p:link>
+                </li>
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>Ligue 2</span>
+                        <f:param name="League" value="16"/>
+                    </p:link>
+                </li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-futbol-o"></i>
+                <span>Germany</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>Bundesliga</span>
+                        <f:param name="League" value="9"/>
+                    </p:link>
+                </li>
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>Bundesliga 2</span>
+                        <f:param name="League" value="10"/>
+                    </p:link>
+                </li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-futbol-o"></i>
+                <span>Scotland</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>Premier League</span>
+                        <f:param name="League" value="5"/>
+                    </p:link>
+                </li>
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>Championship</span>
+                        <f:param name="League" value="6"/>
+                    </p:link>
+                </li>
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>League One</span>
+                        <f:param name="League" value="7"/>
+                    </p:link>
+                </li>
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>League Two</span>
+                        <f:param name="League" value="8"/>
+                    </p:link>
+                </li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-futbol-o"></i>
+                <span>Belgium</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>Jupiler League</span>
+                        <f:param name="League" value="17"/>
+                    </p:link>
+                </li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-futbol-o"></i>
+                <span>Netherlands</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>Ere Divisie</span>
+                        <f:param name="League" value="18"/>
+                    </p:link>
+                </li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-futbol-o"></i>
+                <span>Portugal</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>La Liga Primeira</span>
+                        <f:param name="League" value="19"/>
+                    </p:link>
+                </li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-futbol-o"></i>
+                <span>Turkey</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>Super Lig</span>
+                        <f:param name="League" value="20"/>
+                    </p:link>
+                </li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-futbol-o"></i>
+                <span>Greece</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <p:link outcome="/league">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>Super League</span>
+                        <f:param name="League" value="21"/>
+                    </p:link>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</ui:composition>

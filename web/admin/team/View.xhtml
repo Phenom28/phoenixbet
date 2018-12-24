@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="TeamViewDlg" widgetVar="TeamViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg['ViewTeamTitle']}">
+        <h:form id="TeamViewForm">
+            <h:panelGroup id="display">
+                <p:panelGrid columns="2" rendered="#{teamController.selected != null}">
+                    <h:outputText value="#{msg['ViewTeamLabel_id']}"/>
+                    <h:outputText value="#{teamController.selected.id}" title="#{msg['ViewTeamTitle_id']}"/>
+                    <h:outputText value="#{msg['ViewTeamLabel_name']}"/>
+                    <h:outputText value="#{teamController.selected.name}" title="#{msg['ViewTeamTitle_name']}"/>
+                    <h:outputText value="#{msg['ViewTeamLabel_img']}"/>
+                    <h:outputText value="#{teamController.selected.img}" title="#{msg['ViewTeamTitle_img']}"/>
+                    <h:outputText value="#{msg['ViewTeamLabel_imgSrc']}"/>
+                    <h:outputText value="#{teamController.selected.imgSrc}" title="#{msg['ViewTeamTitle_imgSrc']}"/>
+                </p:panelGrid>
+                <p:commandButton value="#{msg['Close']}" type="button" onclick="PF('TeamViewDialog').hide()"/>
+            </h:panelGroup>
+        </h:form>
+    </p:dialog>
+
+</ui:composition>
