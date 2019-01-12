@@ -1,6 +1,7 @@
 package com.phoenixbet.web.util;
 
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -9,6 +10,10 @@ import javax.faces.model.SelectItem;
 import org.omnifaces.util.Messages;
 
 public class JsfUtil {
+    
+    public static String getStringFromBundle(String bundle, String message){
+        return ResourceBundle.getBundle(bundle).getString(message);
+    }
 
     public static SelectItem[] getSelectItems(List<?> entities, boolean selectOne) {
         int size = selectOne ? entities.size() + 1 : entities.size();

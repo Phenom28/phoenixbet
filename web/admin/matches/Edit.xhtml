@@ -13,41 +13,41 @@
                     <p:outputLabel value="#{msg['EditMatchesLabel_matchDate']}" for="matchDate" />
                     <p:calendar id="matchDate" timeZone="Africa/Lagos" pattern="dd/MM/yyyy" value="#{matchesController.selected.matchDate}" title="#{msg['EditMatchesTitle_matchDate']}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_matchDate']}" showOn="button"/>
                     <p:outputLabel value="#{msg['EditMatchesLabel_matchTime']}" for="matchTime" />
-                    <p:calendar id="matchTime" timeZone="Africa/Lagos" timeOnly="true" pattern="HH:mm:ss" value="#{matchesController.selected.matchTime}" title="#{msg['EditMatchesTitle_matchTime']}" required="false" requiredMessage="#{msg['EditMatchesRequiredMessage_matchTime']}" showOn="button"/>
+                    <p:calendar id="matchTime" timeZone="Africa/Lagos" timeOnly="true" pattern="HH:mm:ss" value="#{matchesController.selected.matchTime}" title="#{msg['EditMatchesTitle_matchTime']}" required="false" requiredMessage="#{msg['EditMatchesRequiredMessage_matchTime']}" showOn="button" showSecond="false" stepMinute="5"/>
                     <p:outputLabel value="#{msg['EditMatchesLabel_matchRound']}" for="matchRound" />
-                    <p:inputNumber id="matchRound" value="#{matchesController.selected.matchRound}" title="#{msg['EditMatchesTitle_matchRound']}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_matchRound']}"/>
+                    <p:inputNumber id="matchRound" value="#{matchesController.selected.matchRound}" title="#{msg['EditMatchesTitle_matchRound']}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_matchRound']}" padControl="false"/>
                     <p:outputLabel value="#{msg['EditMatchesLabel_fullTimeHomeGoal']}" for="fullTimeHomeGoal" />
-                    <p:inputNumber id="fullTimeHomeGoal" value="#{matchesController.selected.fullTimeHomeGoal}" title="#{msg['EditMatchesTitle_fullTimeHomeGoal']}" />
+                    <p:inputNumber id="fullTimeHomeGoal" value="#{matchesController.selected.fullTimeHomeGoal}" title="#{msg['EditMatchesTitle_fullTimeHomeGoal']}" padControl="false"/>
                     <p:outputLabel value="#{msg['EditMatchesLabel_fullTimeAwayGoal']}" for="fullTimeAwayGoal" />
-                    <p:inputNumber id="fullTimeAwayGoal" value="#{matchesController.selected.fullTimeAwayGoal}" title="#{msg['EditMatchesTitle_fullTimeAwayGoal']}" />
+                    <p:inputNumber id="fullTimeAwayGoal" value="#{matchesController.selected.fullTimeAwayGoal}" title="#{msg['EditMatchesTitle_fullTimeAwayGoal']}" padControl="false"/>
                     <p:outputLabel value="#{msg['EditMatchesLabel_halfTimeHomeGoal']}" for="halfTimeHomeGoal" />
-                    <p:inputNumber id="halfTimeHomeGoal" value="#{matchesController.selected.halfTimeHomeGoal}" title="#{msg['EditMatchesTitle_halfTimeHomeGoal']}" />
+                    <p:inputNumber id="halfTimeHomeGoal" value="#{matchesController.selected.halfTimeHomeGoal}" title="#{msg['EditMatchesTitle_halfTimeHomeGoal']}" padControl="false"/>
                     <p:outputLabel value="#{msg['EditMatchesLabel_halfTimeAwayGoal']}" for="halfTimeAwayGoal" />
-                    <p:inputNumber id="halfTimeAwayGoal" value="#{matchesController.selected.halfTimeAwayGoal}" title="#{msg['EditMatchesTitle_halfTimeAwayGoal']}" />
+                    <p:inputNumber id="halfTimeAwayGoal" value="#{matchesController.selected.halfTimeAwayGoal}" title="#{msg['EditMatchesTitle_halfTimeAwayGoal']}" padControl="false"/>
                     <p:outputLabel value="#{msg['EditMatchesLabel_homeShot']}" for="homeShot" />
-                    <p:inputNumber id="homeShot" value="#{matchesController.selected.homeShot}" title="#{msg['EditMatchesTitle_homeShot']}" />
+                    <p:inputNumber id="homeShot" value="#{matchesController.selected.homeShot}" title="#{msg['EditMatchesTitle_homeShot']}" padControl="false"/>
                     <p:outputLabel value="#{msg['EditMatchesLabel_awayShot']}" for="awayShot" />
-                    <p:inputNumber id="awayShot" value="#{matchesController.selected.awayShot}" title="#{msg['EditMatchesTitle_awayShot']}" />
+                    <p:inputNumber id="awayShot" value="#{matchesController.selected.awayShot}" title="#{msg['EditMatchesTitle_awayShot']}" padControl="false"/>
                     <p:outputLabel value="#{msg['EditMatchesLabel_homeShotOnTarget']}" for="homeShotOnTarget" />
-                    <p:inputNumber id="homeShotOnTarget" value="#{matchesController.selected.homeShotOnTarget}" title="#{msg['EditMatchesTitle_homeShotOnTarget']}" />
+                    <p:inputNumber id="homeShotOnTarget" value="#{matchesController.selected.homeShotOnTarget}" title="#{msg['EditMatchesTitle_homeShotOnTarget']}" padControl="false"/>
                     <p:outputLabel value="#{msg['EditMatchesLabel_awayShotOnTarget']}" for="awayShotOnTarget" />
-                    <p:inputNumber id="awayShotOnTarget" value="#{matchesController.selected.awayShotOnTarget}" title="#{msg['EditMatchesTitle_awayShotOnTarget']}" />
+                    <p:inputNumber id="awayShotOnTarget" value="#{matchesController.selected.awayShotOnTarget}" title="#{msg['EditMatchesTitle_awayShotOnTarget']}" padControl="false"/>
                     <p:outputLabel value="#{msg['EditMatchesLabel_homeFoul']}" for="homeFoul" />
-                    <p:inputNumber id="homeFoul" value="#{matchesController.selected.homeFoul}" title="#{msg['EditMatchesTitle_homeFoul']}" />
+                    <p:inputNumber id="homeFoul" value="#{matchesController.selected.homeFoul}" title="#{msg['EditMatchesTitle_homeFoul']}" padControl="false"/>
                     <p:outputLabel value="#{msg['EditMatchesLabel_awayFoul']}" for="awayFoul" />
-                    <p:inputNumber id="awayFoul" value="#{matchesController.selected.awayFoul}" title="#{msg['EditMatchesTitle_awayFoul']}" />
+                    <p:inputNumber id="awayFoul" value="#{matchesController.selected.awayFoul}" title="#{msg['EditMatchesTitle_awayFoul']}" padControl="false"/>
                     <p:outputLabel value="#{msg['EditMatchesLabel_homeCorner']}" for="homeCorner" />
-                    <p:inputNumber id="homeCorner" value="#{matchesController.selected.homeCorner}" title="#{msg['EditMatchesTitle_homeCorner']}" />
+                    <p:inputNumber id="homeCorner" value="#{matchesController.selected.homeCorner}" title="#{msg['EditMatchesTitle_homeCorner']}" padControl="false"/>
                     <p:outputLabel value="#{msg['EditMatchesLabel_awayCorner']}" for="awayCorner" />
-                    <p:inputNumber id="awayCorner" value="#{matchesController.selected.awayCorner}" title="#{msg['EditMatchesTitle_awayCorner']}" />
+                    <p:inputNumber id="awayCorner" value="#{matchesController.selected.awayCorner}" title="#{msg['EditMatchesTitle_awayCorner']}" padControl="false"/>
                     <p:outputLabel value="#{msg['EditMatchesLabel_homeYellow']}" for="homeYellow" />
-                    <p:inputNumber id="homeYellow" value="#{matchesController.selected.homeYellow}" title="#{msg['EditMatchesTitle_homeYellow']}" />
+                    <p:inputNumber id="homeYellow" value="#{matchesController.selected.homeYellow}" title="#{msg['EditMatchesTitle_homeYellow']}" padControl="false"/>
                     <p:outputLabel value="#{msg['EditMatchesLabel_awayYellow']}" for="awayYellow" />
-                    <p:inputNumber id="awayYellow" value="#{matchesController.selected.awayYellow}" title="#{msg['EditMatchesTitle_awayYellow']}" />
+                    <p:inputNumber id="awayYellow" value="#{matchesController.selected.awayYellow}" title="#{msg['EditMatchesTitle_awayYellow']}" padControl="false"/>
                     <p:outputLabel value="#{msg['EditMatchesLabel_homeRed']}" for="homeRed" />
-                    <p:inputNumber id="homeRed" value="#{matchesController.selected.homeRed}" title="#{msg['EditMatchesTitle_homeRed']}" />
+                    <p:inputNumber id="homeRed" value="#{matchesController.selected.homeRed}" title="#{msg['EditMatchesTitle_homeRed']}" padControl="false"/>
                     <p:outputLabel value="#{msg['EditMatchesLabel_awayRed']}" for="awayRed" />
-                    <p:inputNumber id="awayRed" value="#{matchesController.selected.awayRed}" title="#{msg['EditMatchesTitle_awayRed']}" />
+                    <p:inputNumber id="awayRed" value="#{matchesController.selected.awayRed}" title="#{msg['EditMatchesTitle_awayRed']}" padControl="false"/>
                     <p:outputLabel value="#{msg['EditMatchesLabel_matchStatus']}" for="matchStatus" />
                     <p:selectOneMenu id="matchStatus" value="#{matchesController.selected.matchStatus}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_matchStatus']}">
                         <f:selectItem itemLabel="#{msg['SelectOneMessage']}"/>
@@ -66,7 +66,8 @@
                     </p:selectOneMenu>
                     <p:outputLabel value="#{msg['EditMatchesLabel_league']}" for="league" />
                     <p:selectOneMenu id="league" value="#{matchesController.selected.league}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_league']}"
-                                     var="leag">
+                                     var="leag" filter="true" filterMatchMode="contains">
+                        <p:ajax listener="#{matchesController.onLeagueChange}" update="homeTeam, awayTeam"/>
                         <f:selectItem itemLabel="#{msg['SelectOneMessage']}"/>
                         <f:selectItems value="#{leagueController.leaguesAvailableSelectOne}"
                                        var="league"
@@ -82,7 +83,7 @@
                     <p:outputLabel value="#{msg['EditMatchesLabel_homeTeam']}" for="homeTeam" />
                     <p:selectOneMenu id="homeTeam" value="#{matchesController.selected.homeTeam}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_homeTeam']}">
                         <f:selectItem itemLabel="#{msg['SelectOneMessage']}"/>
-                        <f:selectItems value="#{teamController.teamsAvailableSelectOne}"
+                        <f:selectItems value="#{matchesController.teams}"
                                        var="homeTeam"
                                        itemValue="#{homeTeam}"
                                        itemLabel="#{homeTeam.name}"/>
@@ -90,7 +91,7 @@
                     <p:outputLabel value="#{msg['EditMatchesLabel_awayTeam']}" for="awayTeam" />
                     <p:selectOneMenu id="awayTeam" value="#{matchesController.selected.awayTeam}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_awayTeam']}">
                         <f:selectItem itemLabel="#{msg['SelectOneMessage']}"/>
-                        <f:selectItems value="#{teamController.teamsAvailableSelectOne}"
+                        <f:selectItems value="#{matchesController.teams}"
                                        var="awayTeam"
                                        itemValue="#{awayTeam}"
                                        itemLabel="#{awayTeam.name}"/>

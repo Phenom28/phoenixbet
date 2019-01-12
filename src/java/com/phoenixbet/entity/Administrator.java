@@ -1,6 +1,7 @@
 package com.phoenixbet.entity;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,14 +43,17 @@ public class Administrator implements Serializable {
     private String lastName;
     private String userName;
     private String password;
+    private String email;
     private Date dateCreated;
     private List<Groups> groups;
 
     public Administrator() {
+        this.dateCreated = Date.from(Instant.now());
     }
 
     public Administrator(Integer id) {
         this.id = id;
+        this.dateCreated = Date.from(Instant.now());
     }
 
     @Id
@@ -103,6 +107,16 @@ public class Administrator implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Basic(optional = false)
+    @Column(name = "EMAIL")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Basic(optional = false)

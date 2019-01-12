@@ -12,56 +12,57 @@
                 <p:panelGrid columns="2" rendered="#{matchesController.selected != null}">
                     <p:outputLabel value="Upload"/>
                     <p:fileUpload fileUploadListener="#{matchesController.handleFileUpload}" mode="advanced" skinSimple="true"
-                                  allowTypes="/(\.|\/)(xls|xlsx)$/"/>
+                                  allowTypes="/(\.|\/)(xls|xlsx)$/" auto="true"/>
                     <p:outputLabel value="Sheet" for="sheet"/>
                     <p:inputText id="sheet" value="#{matchesController.sheet}"/>
                     <p:outputLabel value="Start Row" for="startRow"/>
-                    <p:inputNumber id="startRow" value="#{matchesController.firstRow}"/>
+                    <p:inputNumber id="startRow" value="#{matchesController.firstRow}" padControl="false"/>
                     <p:outputLabel value="Last Row" for="lastRow"/>
-                    <p:inputNumber id="lastRow" value="#{matchesController.lastRow}"/>
+                    <p:inputNumber id="lastRow" value="#{matchesController.lastRow}" padControl="false"/>
                     <p:outputLabel value="MatchDate" for="matchDate"/>
-                    <p:inputNumber id="matchDate" value="#{matchesController.date}"/>
+                    <p:inputNumber id="matchDate" value="#{matchesController.date}" padControl="false"/>
                     <p:outputLabel value="Home" for="home"/>
-                    <p:inputNumber id="home" value="#{matchesController.homeTeam}"/>
+                    <p:inputNumber id="home" value="#{matchesController.homeTeam}" padControl="false"/>
                     <p:outputLabel value="Away" for="away"/>
-                    <p:inputNumber id="away" value="#{matchesController.awayTeam}"/>
+                    <p:inputNumber id="away" value="#{matchesController.awayTeam}" padControl="false"/>
                     <p:outputLabel value="FullHGoal" for="fullHGoal"/>
-                    <p:inputNumber id="fullHGoal" value="#{matchesController.fullTimeHomeGoal}"/>
+                    <p:inputNumber id="fullHGoal" value="#{matchesController.fullTimeHomeGoal}" padControl="false"/>
                     <p:outputLabel value="FullAGoal" for="fullAGoal"/>
-                    <p:inputNumber id="fullAGoal" value="#{matchesController.fullTimeAwayGoal}"/>
+                    <p:inputNumber id="fullAGoal" value="#{matchesController.fullTimeAwayGoal}" padControl="false"/>
                     <p:outputLabel value="HalfHGoal" for="halfHGoal"/>
-                    <p:inputNumber id="halfHGoal" value="#{matchesController.halfTimeHomeGoal}"/>
+                    <p:inputNumber id="halfHGoal" value="#{matchesController.halfTimeHomeGoal}" padControl="false"/>
                     <p:outputLabel value="HalfAGoal" for="halfAGoal"/>
-                    <p:inputNumber id="halfAGoal" value="#{matchesController.halfTimeAwayGoal}"/>
+                    <p:inputNumber id="halfAGoal" value="#{matchesController.halfTimeAwayGoal}" padControl="false"/>
                     <p:outputLabel value="HomeShot" for="homeShot"/>
-                    <p:inputNumber id="homeShot" value="#{matchesController.homeShot}"/>
+                    <p:inputNumber id="homeShot" value="#{matchesController.homeShot}" padControl="false"/>
                     <p:outputLabel value="AwayShot" for="awayShot"/>
-                    <p:inputNumber id="awayShot" value="#{matchesController.awayShot}"/>
+                    <p:inputNumber id="awayShot" value="#{matchesController.awayShot}" padControl="false"/>
                     <p:outputLabel value="HomeTarget" for="homeTarget"/>
-                    <p:inputNumber id="homeTarget" value="#{matchesController.homeShotOnTarget}"/>
+                    <p:inputNumber id="homeTarget" value="#{matchesController.homeShotOnTarget}" padControl="false"/>
                     <p:outputLabel value="AwayTarget" for="awayTarget"/>
-                    <p:inputNumber id="awayTarget" value="#{matchesController.awayShotOnTarget}"/>
+                    <p:inputNumber id="awayTarget" value="#{matchesController.awayShotOnTarget}" padControl="false"/>
                     <p:outputLabel value="HomeFoul" for="homeFoul"/>
-                    <p:inputNumber id="homeFoul" value="#{matchesController.homeFoul}"/>
+                    <p:inputNumber id="homeFoul" value="#{matchesController.homeFoul}" padControl="false"/>
                     <p:outputLabel value="AwayFoul" for="awayFoul"/>
-                    <p:inputNumber id="awayFoul" value="#{matchesController.awayFoul}"/>
+                    <p:inputNumber id="awayFoul" value="#{matchesController.awayFoul}" padControl="false"/>
                     <p:outputLabel value="HomeCorner" for="homeCorner"/>
-                    <p:inputNumber id="homeCorner" value="#{matchesController.homeCorner}"/>
+                    <p:inputNumber id="homeCorner" value="#{matchesController.homeCorner}" padControl="false"/>
                     <p:outputLabel value="AwayCorner" for="awayCorner"/>
-                    <p:inputNumber id="awayCorner" value="#{matchesController.awayCorner}"/>
+                    <p:inputNumber id="awayCorner" value="#{matchesController.awayCorner}" padControl="false"/>
                     <p:outputLabel value="HomeYellow" for="homeYellow"/>
-                    <p:inputNumber id="homeYellow" value="#{matchesController.homeYellow}"/>
+                    <p:inputNumber id="homeYellow" value="#{matchesController.homeYellow}" padControl="false"/>
                     <p:outputLabel value="AwayYellow" for="awayYellow"/>
-                    <p:inputNumber id="awayYellow" value="#{matchesController.awayYellow}"/>
+                    <p:inputNumber id="awayYellow" value="#{matchesController.awayYellow}" padControl="false"/>
                     <p:outputLabel value="HomeRed" for="homeRed"/>
-                    <p:inputNumber id="homeRed" value="#{matchesController.homeRed}"/>
+                    <p:inputNumber id="homeRed" value="#{matchesController.homeRed}" padControl="false"/>
                     <p:outputLabel value="AwayRed" for="AwayRed"/>
-                    <p:inputNumber id="AwayRed" value="#{matchesController.awayRed}"/>
+                    <p:inputNumber id="AwayRed" value="#{matchesController.awayRed}" padControl="false"/>
                     <p:outputLabel value="#{msg['CreateMatchesLabel_matchRound']}" for="matchRound" />
-                    <p:inputNumber id="matchRound" decimalPlaces="0" value="#{matchesController.round}" title="#{msg['CreateMatchesTitle_matchRound']}" required="true" requiredMessage="#{msg['CreateMatchesRequiredMessage_matchRound']}"/>
+                    <p:inputNumber id="matchRound" value="#{matchesController.round}" title="#{msg['CreateMatchesTitle_matchRound']}" required="true" requiredMessage="#{msg['CreateMatchesRequiredMessage_matchRound']}" padControl="false"/>
                     <p:outputLabel value="#{msg['CreateMatchesLabel_league']}" for="leagueId" />
                     <p:selectOneMenu id="leagueId" value="#{matchesController.leag}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_league']}"
-                                     var="leag">
+                                     var="leag" filter="true" filterMatchMode="contains">
+                        <f:selectItem itemLabel="Select League" itemValue="" noSelectionOption="true"/>
                         <f:selectItems value="#{leagueController.leaguesAvailableSelectOne}"
                                        var="league"
                                        itemLabel="#{league.name}"
@@ -75,6 +76,7 @@
                     </p:selectOneMenu>
                     <p:outputLabel value="#{msg['CreateMatchesLabel_matchStatus']}" for="matchStatus" />
                     <p:selectOneMenu id="matchStatus" value="#{matchesController.status}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_matchStatus']}">
+                        <f:selectItem itemLabel="Select Status" itemValue="" noSelectionOption="true"/>
                         <f:selectItems value="#{matchStatusController.matchStatusesAvailableSelectOne}"
                                        var="matchStatus"
                                        itemValue="#{matchStatus.id}"
@@ -82,6 +84,7 @@
                     </p:selectOneMenu>
                     <p:outputLabel value="#{msg['CreateMatchesLabel_season']}" for="season" />
                     <p:selectOneMenu id="season" value="#{matchesController.season}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_season']}">
+                        <f:selectItem itemLabel="Select Season" itemValue="" noSelectionOption="true"/>
                         <f:selectItems value="#{seasonController.seasonsAvailableSelectOne}"
                                        var="season"
                                        itemValue="#{season.id}"

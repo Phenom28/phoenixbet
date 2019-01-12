@@ -137,5 +137,24 @@
         <exception-type>javax.persistence.OptimisticLockException</exception-type>
         <location>/optimistic.jsf</location>
     </error-page>
+    
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>phoenixRealm</realm-name>
+        <form-login-config>
+            <form-login-page>/admin/login.jsf</form-login-page>
+            <form-error-page>/admin/login.jsf</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Secure Pages</web-resource-name>
+            <description/>
+            <url-pattern>/monitoring</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint> 
 
 </web-app>

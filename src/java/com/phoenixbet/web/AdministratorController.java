@@ -4,6 +4,7 @@ import com.phoenixbet.entity.Administrator;
 import com.phoenixbet.web.util.JsfUtil;
 import com.phoenixbet.web.util.JsfUtil.PersistAction;
 import com.phoenixbet.ejb.AdministratorBean;
+import com.phoenixbet.web.util.EncryptionUtil;
 
 import java.io.Serializable;
 import java.util.List;
@@ -28,6 +29,7 @@ import org.omnifaces.cdi.ViewScoped;
 public class AdministratorController implements Serializable {
 
     private static final long serialVersionUID = 4117191361024023124L;
+    private static final String BUNDLE = "/Bundle";
     @EJB
     private AdministratorBean adminBean;
     private List<Administrator> admins = null;
@@ -52,9 +54,37 @@ public class AdministratorController implements Serializable {
         selected = new Administrator();
         return selected;
     }
+    
+    public boolean isUserInDataBase(String userName) {
+        return (getAdminBean().findByUserName(userName));
+    }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("AdministratorCreated"));
+        if (selected != null) {
+            try {
+                if (!isUserInDataBase(selected.getUserName())) {
+                    selected.setPassword(EncryptionUtil.generateSHA256(selected.getPassword()));
+                    getAdminBean().create(selected);
+                    JsfUtil.addSuccessMessage(JsfUtil.getStringFromBundle(BUNDLE, "AdministratorCreated"));
+                } else {
+                    JsfUtil.addErrorMessage("User is in Database");
+                }
+            } catch (EJBException ex) {
+                String msg = "";
+                Throwable cause = ex.getCause();
+                if (cause != null) {
+                    msg = cause.getLocalizedMessage();
+                }
+                if (msg.length() > 0) {
+                    JsfUtil.addErrorMessage(msg);
+                } else {
+                    JsfUtil.addErrorMessage(ex, JsfUtil.getStringFromBundle(BUNDLE, "PersistenceErrorOccured"));
+                }
+            } catch (Exception e) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+                JsfUtil.addErrorMessage(e, JsfUtil.getStringFromBundle(BUNDLE, "PersistenceErrorOccured"));
+            }
+        }
         if (!JsfUtil.isValidationFailed()) {
             admins = null;    // Invalidate list of items to trigger re-query.
         }

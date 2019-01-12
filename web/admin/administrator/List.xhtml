@@ -64,6 +64,12 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
+                            <h:outputText value="Email"/>
+                        </f:facet>
+                        <h:outputText value="#{admin.email}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
                             <h:outputText value="#{msg['ListAdministratorTitle_dateCreated']}"/>
                         </f:facet>
                         <h:outputText value="#{admin.dateCreated}">

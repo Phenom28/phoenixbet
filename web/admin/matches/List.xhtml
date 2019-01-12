@@ -29,7 +29,7 @@
                 <p:dataTable id="notStartedMatches" value="#{matchesController.notStartedMatches}" var="notStarted"
                              selectionMode="single" selection="#{matchesController.selected}" paginator="true"
                              rowKey="#{notStarted.id}" rows="10" paginatorPosition="bottom"
-                             rowsPerPageTemplate="10,20,30,40,50"
+                             rowsPerPageTemplate="10,20,30,40,50" emptyMessage="No Matches available"
                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
 
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton editExcel deleteButton"/>
@@ -152,7 +152,7 @@
                 <p:separator/>
 
                 <p:dataTable id="previousMatches" value="#{matchesController.finishedMatches}" var="finishedMatches"
-                             selectionMode="single" paginator="true" rowKey="#{finishedMatches.id}"
+                             selectionMode="single" paginator="true" rowKey="#{finishedMatches.id}" emptyMessage="No Matches found"
                              rows="10" paginatorPosition="bottom" rowsPerPageTemplate="5,8,9,10,12,20,30,40,50"
                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
                     <p:column>

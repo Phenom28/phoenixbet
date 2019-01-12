@@ -23,6 +23,7 @@ import com.phoenixbet.entity.League;
 import com.phoenixbet.entity.OverUnder;
 import com.phoenixbet.entity.SecondHalf;
 import com.phoenixbet.entity.SecondHalfGoals;
+import com.phoenixbet.entity.Team;
 import com.phoenixbet.excel.ExcelMatch;
 import com.phoenixbet.excel.ExcelReader;
 import com.phoenixbet.poissondist.PoissonModel;
@@ -81,6 +82,7 @@ public class MatchesController implements Serializable {
     private TeamBean teamBean;
     @EJB
     private LeagueBean leagueBean;
+    private List<Team> teams;
     private List<Matches> matches = null;
     private List<Matches> notStartedMatches = null;
     private List<Matches> finishedMatches = null;
@@ -302,7 +304,7 @@ public class MatchesController implements Serializable {
         return matche;
     }
 
-    public List<Matches> setTeams() {
+    public List<Matches> setTeam() {
         reader = new ExcelReader(file, sheet, firstRow, lastRow, date, round, homeTeam, awayTeam);
         List<ExcelMatch> excelMatches;
         List<Matches> matche = new ArrayList<>();
@@ -364,13 +366,13 @@ public class MatchesController implements Serializable {
     }
 
     public void createNoPredict() {
-        selected.setBtts(bttsBean.find(215));
-        selected.setDoubleChance(doubleChanceBean.find(215));
-        selected.setSecondHalf(secondHalfBean.find(215));
-        selected.setSecondHalfGoals(secondHalfGoalsBean.find(215));
-        selected.setFirstHalf(firstHalfBean.find(215));
-        selected.setFirstHalfGoals(firstHalfGoalsBean.find(215));
-        selected.setOverUnder(overUnderBean.find(215));
+        selected.setBtts(bttsBean.find(1));
+        selected.setDoubleChance(doubleChanceBean.find(1));
+        selected.setSecondHalf(secondHalfBean.find(1));
+        selected.setSecondHalfGoals(secondHalfGoalsBean.find(1));
+        selected.setFirstHalf(firstHalfBean.find(1));
+        selected.setFirstHalfGoals(firstHalfGoalsBean.find(1));
+        selected.setOverUnder(overUnderBean.find(1));
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("MatchesCreated"));
         if (!JsfUtil.isValidationFailed()) {
             matches = null;    // Invalidate list of items to trigger re-query.
@@ -398,13 +400,13 @@ public class MatchesController implements Serializable {
             selected.setAwayYellow(match.getAwayYellow());
             selected.setHomeRed(match.getHomeRed());
             selected.setAwayRed(match.getAwayRed());
-            selected.setBtts(bttsBean.find(215));
-            selected.setDoubleChance(doubleChanceBean.find(215));
-            selected.setSecondHalf(secondHalfBean.find(215));
-            selected.setSecondHalfGoals(secondHalfGoalsBean.find(215));
-            selected.setFirstHalf(firstHalfBean.find(215));
-            selected.setFirstHalfGoals(firstHalfGoalsBean.find(215));
-            selected.setOverUnder(overUnderBean.find(215));
+            selected.setBtts(bttsBean.find(1));
+            selected.setDoubleChance(doubleChanceBean.find(1));
+            selected.setSecondHalf(secondHalfBean.find(1));
+            selected.setSecondHalfGoals(secondHalfGoalsBean.find(1));
+            selected.setFirstHalf(firstHalfBean.find(1));
+            selected.setFirstHalfGoals(firstHalfGoalsBean.find(1));
+            selected.setOverUnder(overUnderBean.find(1));
 
             prepareExcel();
             persist(JsfUtil.PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("MatchesCreated"));
@@ -450,7 +452,7 @@ public class MatchesController implements Serializable {
     }
 
     public void createFromExcel() {
-        for (Matches setTeam : setTeams()) {
+        for (Matches setTeam : setTeam()) {
             selected.setMatchDate(setTeam.getMatchDate());
             selected.setMatchRound(setTeam.getMatchRound());
             selected.setHomeTeam(setTeam.getHomeTeam());
@@ -492,6 +494,14 @@ public class MatchesController implements Serializable {
         finishedMatches = getMatchBean().findByStatusLeague(league, 2);
         return finishedMatches;
     }
+    
+    public void onLeagueChange(){
+        if (selected.getLeague() != null) {
+            teams = teamBean.findByLeague(selected.getLeague());
+        } else {
+            teams = new ArrayList<>();
+        }
+    }
 
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
@@ -508,25 +518,25 @@ public class MatchesController implements Serializable {
                     SecondHalfGoals shg = selected.getSecondHalfGoals();
 
                     getMatchBean().remove(selected);
-                    if (btts.getId() != 215) {
+                    if (btts.getId() != 1) {
                         getBttsBean().remove(btts);
                     }
-                    if (db.getId() != 215) {
+                    if (db.getId() != 1) {
                         getDoubleChanceBean().remove(db);
                     }
-                    if (fh.getId() != 215) {
+                    if (fh.getId() != 1) {
                         getFirstHalfBean().remove(fh);
                     }
-                    if (fhg.getId() != 215) {
+                    if (fhg.getId() != 1) {
                         getFirstHalfGoalsBean().remove(fhg);
                     }
-                    if (ou.getId() != 215) {
+                    if (ou.getId() != 1) {
                         getOverUnderBean().remove(ou);
                     }
-                    if (sh.getId() != 215) {
+                    if (sh.getId() != 1) {
                         getSecondHalfBean().remove(sh);
                     }
-                    if (shg.getId() != 215) {
+                    if (shg.getId() != 1) {
                         getSecondHalfGoalsBean().remove(shg);
                     }
                 }
@@ -718,13 +728,13 @@ public class MatchesController implements Serializable {
             selected.setFirstHalfGoals(firstHalfGoals);
             selected.setOverUnder(overUnder);
         } else {
-            selected.setBtts(bttsBean.find(215));
-            selected.setDoubleChance(doubleChanceBean.find(215));
-            selected.setSecondHalf(secondHalfBean.find(215));
-            selected.setSecondHalfGoals(secondHalfGoalsBean.find(215));
-            selected.setFirstHalf(firstHalfBean.find(215));
-            selected.setFirstHalfGoals(firstHalfGoalsBean.find(215));
-            selected.setOverUnder(overUnderBean.find(215));
+            selected.setBtts(bttsBean.find(1));
+            selected.setDoubleChance(doubleChanceBean.find(1));
+            selected.setSecondHalf(secondHalfBean.find(1));
+            selected.setSecondHalfGoals(secondHalfGoalsBean.find(1));
+            selected.setFirstHalf(firstHalfBean.find(1));
+            selected.setFirstHalfGoals(firstHalfGoalsBean.find(1));
+            selected.setOverUnder(overUnderBean.find(1));
         }
     }
 
@@ -1078,6 +1088,14 @@ public class MatchesController implements Serializable {
 
     public void setLeag(League leag) {
         this.leag = leag;
+    }
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 
     @FacesConverter(forClass = Matches.class)

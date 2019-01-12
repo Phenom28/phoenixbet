@@ -15,6 +15,8 @@
                     <p:inputText id="lastName" value="#{administratorController.selected.lastName}" title="#{['CreateAdministratorTitle_lastName']}" required="true" requiredMessage="#{msg['CreateAdministratorRequiredMessage_lastName']}"/>
                     <p:outputLabel value="#{msg['CreateAdministratorLabel_userName']}" for="userName" />
                     <p:inputText id="userName" value="#{administratorController.selected.userName}" title="#{msg['CreateAdministratorTitle_userName']}" required="true" requiredMessage="#{['CreateAdministratorRequiredMessage_userName']}"/>
+                    <p:outputLabel value="Email" for="email"/>
+                    <p:inputText id="email" value="#{administratorController.selected.email}" required="true" requiredMessage="Email is required"/>
                     <p:outputLabel value="#{msg['CreateAdministratorLabel_password']}" for="password" />
                     <p:password id="password" value="#{administratorController.selected.password}" title="#{msg['CreateAdministratorTitle_password']}" required="true" requiredMessage="#{msg['CreateAdministratorRequiredMessage_password']}"
                                 feedback="true" inline="true"/>

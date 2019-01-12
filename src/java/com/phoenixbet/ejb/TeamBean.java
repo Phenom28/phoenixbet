@@ -49,5 +49,11 @@ public class TeamBean extends AbstractBean<Team> {
         Team team = (Team) em.createNamedQuery("Team.findByName").setParameter("name", teamName)
                 .getSingleResult();
         return team;
-    } 
+    }
+    
+    public List<Team> findByLeague(League league){
+        List<Team>  teams = em.createNamedQuery("Team.findByLeague").setParameter("league", league)
+                .getResultList();
+        return teams;
+    }
 }

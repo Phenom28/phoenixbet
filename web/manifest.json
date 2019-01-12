@@ -1,5 +1,5 @@
 {
-    "short_name": "PhoenixBet",
+    "short_name": "PB",
     "name": "PhoenixBet",
     "icons": [
         {
@@ -20,7 +20,7 @@
     ],
     "theme_color": "#3c8dbc",
     "background_color": "#ffffff",
-    "scope": "/phoenixbet/",
-    "start_url": "/phoenixbet/index.jsf",
+    "scope": "/",
+    "start_url": "/index.jsf",
     "display": "standalone"
 }

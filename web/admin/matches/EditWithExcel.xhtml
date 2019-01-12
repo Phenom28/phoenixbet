@@ -102,7 +102,7 @@
                                        itemLabel="#{awayTeam.name}"/>
                     </p:selectOneMenu>
                 </p:panelGrid>
-                <p:commandButton actionListener="#{matchesController.update}" value="#{msg['Save']}" update="display,:growl,@(.ui-panel)" onclick="PF('statusDialog').show()" oncomplete="handleSubmit(args, 'MatchesEditExcelDialog');"/>
+                <p:commandButton actionListener="#{matchesController.update}" value="#{msg['Save']}" update="display,:growl,@(.ui-panel)" onclick="PF('statusDialog').show()" oncomplete="handleSubmit(args, 'MatchesEditExcelDialog');" disabled="#{empty matchesController.selected.fullTimeHomeGoal}"/>
                 <p:commandButton actionListener="#{matchesController.setEdit}" value="Set Edit" onclick="showBar()" oncomplete="hideBar()" update=":MatchesEditExcelForm"/>
                 <p:commandButton value="#{msg['Cancel']}" type="button" onclick="PF('MatchesEditExcelDialog').hide()"/>
             </h:panelGroup>

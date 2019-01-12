@@ -21,33 +21,32 @@
     </ui:define>
 
     <ui:define name="logo">
-        PhoenixBet
+        <p:graphicImage library="logo" name="logo-32x32.png"/>
     </ui:define>
 
     <ui:define name="logo-mini">
-        PB
+        <p:graphicImage library="logo" name="logo-32x32.png"/>
     </ui:define>
 
-     <ui:define name="menu">
-         <ui:include src="/includes/adminmenu.xhtml"/>
-     </ui:define>
+    <ui:define name="menu">
+        <ui:include src="/includes/adminmenu.xhtml"/>
+    </ui:define>
 
     <ui:define name="top-menu">
         <ui:include src="/includes/top-bar.xhtml"/>
     </ui:define>
-    
+
     <ui:define name="body-begin">
         <p:growl id="growl" life="3000" globalOnly="true" showDetail="true"
                  severity="error,fatal,info,warn" escape="false">
             <p:autoUpdate/>
         </p:growl>
     </ui:define>
-    
+
     <ui:define name="footer">
-          <a target="_blank"
-           href="http://localhost:8080/phoenixbet/">
+        <p:link outcome="/index">
             Copyright (C) 2018 - PhoenixBet
-        </a>
+        </p:link>
 
         <div class="pull-right hidden-xs" style="color: gray">
             <i>#{msg['version']}</i>

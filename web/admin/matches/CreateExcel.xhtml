@@ -12,24 +12,25 @@
                 <p:panelGrid columns="2" rendered="#{matchesController.selected != null}">
                     <p:outputLabel value="Upload"/>
                     <p:fileUpload fileUploadListener="#{matchesController.handleFileUpload}" mode="advanced" skinSimple="true"
-                                  allowTypes="/(\.|\/)(xls|xlsx)$/"/>
+                                  allowTypes="/(\.|\/)(xls|xlsx)$/" auto="true"/>
                     <p:outputLabel value="Sheet" for="sheet"/>
                     <p:inputText id="sheet" value="#{matchesController.sheet}"/>
                     <p:outputLabel value="Start Row" for="startRow"/>
-                    <p:inputNumber id="startRow" value="#{matchesController.firstRow}"/>
+                    <p:inputNumber id="startRow" value="#{matchesController.firstRow}" padControl="false"/>
                     <p:outputLabel value="Last Row" for="lastRow"/>
-                    <p:inputNumber id="lastRow" value="#{matchesController.lastRow}"/>
+                    <p:inputNumber id="lastRow" value="#{matchesController.lastRow}" padControl="false"/>
                     <p:outputLabel value="MatchDate" for="matchDate"/>
-                    <p:inputNumber id="matchDate" value="#{matchesController.date}"/>
+                    <p:inputNumber id="matchDate" value="#{matchesController.date}" padControl="false"/>
                     <p:outputLabel value="Home" for="home"/>
-                    <p:inputNumber id="home" value="#{matchesController.homeTeam}"/>
+                    <p:inputNumber id="home" value="#{matchesController.homeTeam}" padControl="false"/>
                     <p:outputLabel value="Away" for="away"/>
-                    <p:inputNumber id="away" value="#{matchesController.awayTeam}"/>
+                    <p:inputNumber id="away" value="#{matchesController.awayTeam}" padControl="false"/>
                     <p:outputLabel value="#{msg['CreateMatchesLabel_matchRound']}" for="matchRound" />
                     <p:inputNumber id="matchRound" padControl="false" value="#{matchesController.round}" title="#{msg['CreateMatchesTitle_matchRound']}" required="true" requiredMessage="#{msg['CreateMatchesRequiredMessage_matchRound']}"/>
                     <p:outputLabel value="#{msg['CreateMatchesLabel_league']}" for="leagueId" />
                     <p:selectOneMenu id="leagueId" value="#{matchesController.leag}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_league']}"
-                                     var="leag">
+                                     var="leag" filter="true" filterMatchMode="contains">
+                        <f:selectItem itemLabel="Select League" itemValue="" noSelectionOption="true"/>
                         <f:selectItems value="#{leagueController.leaguesAvailableSelectOne}"
                                        var="league"
                                        itemLabel="#{league.name}"
@@ -43,6 +44,7 @@
                     </p:selectOneMenu>
                     <p:outputLabel value="#{msg['CreateMatchesLabel_matchStatus']}" for="matchStatus" />
                     <p:selectOneMenu id="matchStatus" value="#{matchesController.status}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_matchStatus']}">
+                        <f:selectItem itemLabel="Select Status" itemValue="" noSelectionOption="true"/>
                         <f:selectItems value="#{matchStatusController.matchStatusesAvailableSelectOne}"
                                        var="matchStatus"
                                        itemValue="#{matchStatus.id}"
@@ -50,6 +52,7 @@
                     </p:selectOneMenu>
                     <p:outputLabel value="#{msg['CreateMatchesLabel_season']}" for="season" />
                     <p:selectOneMenu id="season" value="#{matchesController.season}" required="true" requiredMessage="#{msg['EditMatchesRequiredMessage_season']}">
+                        <f:selectItem itemLabel="Select Season" itemValue="" noSelectionOption="true"/>
                         <f:selectItems value="#{seasonController.seasonsAvailableSelectOne}"
                                        var="season"
                                        itemValue="#{season.id}"
